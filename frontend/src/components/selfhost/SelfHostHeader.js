@@ -45,7 +45,7 @@ const callsToAction = [
   // { name: 'Contact', href: `mailto:${process.env.REACT_APP_CONTACT_EMAIL}`, icon: "envelope-fill" },
 ];
 
-const ctaLink = "https://github.com/robinkarlberg/transfer.zip-web";
+const ctaLink = "https://github.com/robinkarlberg/transfer.javascript.az-web";
 const ctaText = "GitHub";
 
 export default function SelfHostHeader() {

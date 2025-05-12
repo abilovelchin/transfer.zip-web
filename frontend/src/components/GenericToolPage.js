@@ -1,8 +1,17 @@
 import { Link } from "react-router-dom";
 import BIcon from "./BIcon";
 
-export default function GenericToolPage({ title, display, tags, children, subtitle, description, question, steps, related }) {
-
+export default function GenericToolPage({
+  title,
+  display,
+  tags,
+  children,
+  subtitle,
+  description,
+  question,
+  steps,
+  related,
+}) {
   return (
     <div className="bg-white">
       <div className="relative isolate">
@@ -28,7 +37,12 @@ export default function GenericToolPage({ title, display, tags, children, subtit
               strokeWidth={0}
             />
           </svg>
-          <rect fill="url(#83fd4e5a-9d52-42fc-97b6-718e5d7ee527)" width="100%" height="100%" strokeWidth={0} />
+          <rect
+            fill="url(#83fd4e5a-9d52-42fc-97b6-718e5d7ee527)"
+            width="100%"
+            height="100%"
+            strokeWidth={0}
+          />
         </svg>
         <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:flex lg:items-center lg:gap-x-10 lg:px-8 lg:py-40">
           <div className="mx-auto max-w-2xl lg:mx-0 lg:flex-auto">
@@ -55,7 +69,7 @@ export default function GenericToolPage({ title, display, tags, children, subtit
               >
                 Create Account
               </Link>
-              <a href="https://github.com/robinkarlberg/transfer.zip-web" className="text-sm font-semibold leading-6 text-gray-900">
+              <a href="https://github.com/robinkarlberg/transfer.javascript.az-web" className="text-sm font-semibold leading-6 text-gray-900">
                 <BIcon name={"star"} /> Star on GitHub <span aria-hidden="true">→</span>
               </a>
             </div> */}
@@ -66,5 +80,5 @@ export default function GenericToolPage({ title, display, tags, children, subtit
         </div>
       </div>
     </div>
-  )
+  );
 }

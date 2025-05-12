@@ -6,7 +6,7 @@ import { getGoogleLink, login, requestPasswordReset } from "../Api";
 import { sleep } from "../utils";
 import Spinner from "../components/Spinner";
 
-import logo from "../img/icon.png"
+import logo from "../img/icon.png";
 import { ApplicationContext } from "../providers/ApplicationProvider";
 import BIcon from "../components/BIcon";
 import Modal from "../components/elements/Modal";
@@ -27,77 +27,81 @@ import SignInWithGoogleButton from "../components/SignInWithGoogleButton";
   ```
 */
 export default function SignInPage() {
-  const { displayGenericModal, displaySuccessModal, displayErrorModal } = useContext(ApplicationContext)
-  const { refreshUser } = useContext(AuthContext)
-  const [message, setMessage] = useState(null)
-  const [loading, setLoading] = useState(false)
+  const { displayGenericModal, displaySuccessModal, displayErrorModal } =
+    useContext(ApplicationContext);
+  const { refreshUser } = useContext(AuthContext);
+  const [message, setMessage] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  const [loadingForgotPassword, setLoadingForgotPassword] = useState(false)
-  const [showForgotPasswordModal, setShowForgotPasswordModal] = useState(false)
+  const [loadingForgotPassword, setLoadingForgotPassword] = useState(false);
+  const [showForgotPasswordModal, setShowForgotPasswordModal] = useState(false);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const validateEmail = (email) => {
-    return email.length > 0
-  }
+    return email.length > 0;
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    setMessage(null)
+    e.preventDefault();
+    setMessage(null);
 
-    const formData = new FormData(e.target)
-    const email = formData.get("email")
-    const password = formData.get("password")
+    const formData = new FormData(e.target);
+    const email = formData.get("email");
+    const password = formData.get("password");
 
-    setLoading(true)
-    await sleep(1000)
+    setLoading(true);
+    await sleep(1000);
 
     try {
-      if (!validateEmail(email)) return setMessage("Invalid email")
+      if (!validateEmail(email)) return setMessage("Invalid email");
       // if (password.length < 6) return setMessage("Password too short (min 6 characters")
 
-      const res = await login(email, password)
+      const res = await login(email, password);
       if (res.success) {
-        await refreshUser()
-        navigate("/app")
+        await refreshUser();
+        navigate("/app");
       }
+    } catch (err) {
+      setMessage(err.msg || err.message);
+    } finally {
+      setLoading(false);
     }
-    catch (err) {
-      setMessage(err.msg || err.message)
-    }
-    finally {
-      setLoading(false)
-    }
-  }
+  };
 
-  const handleForgotPasswordSubmit = async e => {
-    e.preventDefault()
+  const handleForgotPasswordSubmit = async (e) => {
+    e.preventDefault();
 
-    setLoadingForgotPassword(true)
-    await sleep(300)
+    setLoadingForgotPassword(true);
+    await sleep(300);
     try {
-      const formData = new FormData(e.target)
-      const email = formData.get("email")
-      const res = await requestPasswordReset(email)
+      const formData = new FormData(e.target);
+      const email = formData.get("email");
+      const res = await requestPasswordReset(email);
 
-      setShowForgotPasswordModal(false)
-      displaySuccessModal("Reset link sent!", "Check your email for further instructions.")
+      setShowForgotPasswordModal(false);
+      displaySuccessModal(
+        "Reset link sent!",
+        "Check your email for further instructions."
+      );
+    } catch (err) {
+      displayErrorModal(err.message);
+    } finally {
+      setLoadingForgotPassword(false);
     }
-    catch (err) {
-      displayErrorModal(err.message)
-    }
-    finally {
-      setLoadingForgotPassword(false)
-    }
-    
-  }
+  };
 
   return (
     <>
-      <Modal loading={loadingForgotPassword} show={showForgotPasswordModal} title="Forgot Password?" buttons={[
-        { title: "Ok", form: "forgotPasswordForm" },
-        { title: "Cancel", onClick: () => setShowForgotPasswordModal(false) },
-      ]}>
+      <Modal
+        loading={loadingForgotPassword}
+        show={showForgotPasswordModal}
+        title="Forgot Password?"
+        buttons={[
+          { title: "Ok", form: "forgotPasswordForm" },
+          { title: "Cancel", onClick: () => setShowForgotPasswordModal(false) },
+        ]}
+      >
         <div>
           <p className="text-sm text-gray-500">
             Enter your email. You will receive a reset link.
@@ -115,10 +119,15 @@ export default function SignInPage() {
         </div>
       </Modal>
       <div className="flex min-h-[100vh] flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-        <Link className="absolute top-8 text-xl me-1 text-primary hover:text-primary-light" onClick={() => window.history.back()}>&larr; Back</Link>
+        <Link
+          className="absolute top-8 text-xl me-1 text-primary hover:text-primary-light"
+          onClick={() => window.history.back()}
+        >
+          &larr; Back
+        </Link>
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
-            alt="Transfer.zip logo"
+            alt="transfer.javascript.az logo"
             src={logo}
             className="mx-auto h-10 w-auto"
           />
@@ -128,9 +137,17 @@ export default function SignInPage() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form onSubmit={handleSubmit} action="#" method="POST" className="space-y-6">
+          <form
+            onSubmit={handleSubmit}
+            action="#"
+            method="POST"
+            className="space-y-6"
+          >
             <div>
-              <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">
+              <label
+                htmlFor="email"
+                className="block text-sm/6 font-medium text-gray-900"
+              >
                 Email address
               </label>
               <div className="mt-2">
@@ -147,11 +164,18 @@ export default function SignInPage() {
 
             <div>
               <div className="flex items-center justify-between">
-                <label htmlFor="password" className="block text-sm/6 font-medium text-gray-900">
+                <label
+                  htmlFor="password"
+                  className="block text-sm/6 font-medium text-gray-900"
+                >
                   Password
                 </label>
                 <div className="text-sm">
-                  <button type="button" onClick={() => setShowForgotPasswordModal(true)} className="font-semibold text-primary hover:text-primary-light">
+                  <button
+                    type="button"
+                    onClick={() => setShowForgotPasswordModal(true)}
+                    className="font-semibold text-primary hover:text-primary-light"
+                  >
                     Forgot password?
                   </button>
                 </div>
@@ -168,11 +192,11 @@ export default function SignInPage() {
               </div>
             </div>
             <div>
-              {message &&
+              {message && (
                 <div className="mb-2">
                   <span className="text-red-600 text-sm">{message}</span>
                 </div>
-              }
+              )}
               <div>
                 <button
                   disabled={loading}
@@ -182,7 +206,7 @@ export default function SignInPage() {
                   Sign in {loading && <Spinner className={"ms-2"} />}
                 </button>
                 <div className="mt-2 flex flex-row gap-2">
-                  <SignInWithGoogleButton disabled={loading}/>
+                  <SignInWithGoogleButton disabled={loading} />
                   {/* <button
                     disabled={loading}
                     type="submit"
@@ -196,13 +220,16 @@ export default function SignInPage() {
           </form>
 
           <p className="mt-10 text-center text-sm/6 text-gray-500">
-            Don't have an account?{' '}
-            <Link to="/signup" className="font-semibold text-primary hover:text-primary-light">
+            Don't have an account?{" "}
+            <Link
+              to="/signup"
+              className="font-semibold text-primary hover:text-primary-light"
+            >
               Sign up
             </Link>
           </p>
         </div>
       </div>
     </>
-  )
+  );
 }

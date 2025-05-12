@@ -42,10 +42,13 @@ export default function QuickShareNew({}) {
   const [stars, setStars] = useState(null);
 
   useEffect(() => {
-    fetch("https://api.github.com/repos/robinkarlberg/transfer.zip-web", {
-      credentials: "omit",
-      method: "GET",
-    })
+    fetch(
+      "https://api.github.com/repos/robinkarlberg/transfer.javascript.az-web",
+      {
+        credentials: "omit",
+        method: "GET",
+      }
+    )
       .then((res) => res.json())
       .then((json) => {
         setStars(json.stargazers_count);

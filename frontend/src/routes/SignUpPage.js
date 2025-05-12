@@ -6,64 +6,64 @@ import { login, register } from "../Api";
 import { sleep } from "../utils";
 import Spinner from "../components/Spinner";
 
-import logo from "../img/icon.png"
+import logo from "../img/icon.png";
 import SignInWithGoogleButton from "../components/SignInWithGoogleButton";
 
-import SignUpDemo from "../img/SignUpDemo.mp4"
+import SignUpDemo from "../img/SignUpDemo.mp4";
 
 const features = [
   {
     title: "Size Does Not Matter",
-    description: "Send 1TB files, and make the download link available for up to a year."
+    description:
+      "Send 1TB files, and make the download link available for up to a year.",
   },
   {
     title: "Size Does Not Matter",
-    description: "Send 1TB files, and make the download link available for up to a year."
+    description:
+      "Send 1TB files, and make the download link available for up to a year.",
   },
-]
+];
 
 export default function SignUpPage() {
-  const { refreshUser } = useContext(AuthContext)
-  const [message, setMessage] = useState(null)
-  const [loading, setLoading] = useState(false)
+  const { refreshUser } = useContext(AuthContext);
+  const [message, setMessage] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const validateEmail = (email) => {
-    return email.length > 0
-  }
+    return email.length > 0;
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    setMessage(null)
+    e.preventDefault();
+    setMessage(null);
 
-    const formData = new FormData(e.target)
-    const email = formData.get("email")
-    const password = formData.get("password")
+    const formData = new FormData(e.target);
+    const email = formData.get("email");
+    const password = formData.get("password");
 
-    setLoading(true)
-    await sleep(200)
-
+    setLoading(true);
+    await sleep(200);
 
     try {
-      if (!validateEmail(email)) return setMessage("Invalid email")
-      if (password.length < 6) return setMessage("Password too short (minimum 8 characters)")
+      if (!validateEmail(email)) return setMessage("Invalid email");
+      if (password.length < 6)
+        return setMessage("Password too short (minimum 8 characters)");
 
-      if (window.sa_loaded) window.sa_event("signup")
+      if (window.sa_loaded) window.sa_event("signup");
 
-      const res = await register(email, password)
+      const res = await register(email, password);
       if (res.success) {
-        await refreshUser()
-        navigate("/app")
+        await refreshUser();
+        navigate("/app");
       }
+    } catch (err) {
+      setMessage(err.msg || err.message);
+    } finally {
+      setLoading(false);
     }
-    catch (err) {
-      setMessage(err.msg || err.message)
-    }
-    finally {
-      setLoading(false)
-    }
-  }
+  };
 
   return (
     <>
@@ -93,11 +93,16 @@ export default function SignUpPage() {
           </div>
         </div>
         <div className="relative flex flex-1 flex-col justify-center px-6 py-12 lg:px-8 z-10">
-          <Link className="z-10 absolute top-6 text-xl me-1 text-primary hover:text-primary-light" onClick={() => window.history.back()}>&larr; Back</Link>
+          <Link
+            className="z-10 absolute top-6 text-xl me-1 text-primary hover:text-primary-light"
+            onClick={() => window.history.back()}
+          >
+            &larr; Back
+          </Link>
 
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">
             <img
-              alt="Transfer.zip logo"
+              alt="transfer.javascript.az logo"
               src={logo}
               className="mx-auto h-10 w-auto"
             />
@@ -107,9 +112,17 @@ export default function SignUpPage() {
           </div>
 
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form onSubmit={handleSubmit} action="#" method="POST" className="space-y-6">
+            <form
+              onSubmit={handleSubmit}
+              action="#"
+              method="POST"
+              className="space-y-6"
+            >
               <div>
-                <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">
+                <label
+                  htmlFor="email"
+                  className="block text-sm/6 font-medium text-gray-900"
+                >
                   Email address
                 </label>
                 <div className="mt-2">
@@ -126,7 +139,10 @@ export default function SignUpPage() {
 
               <div>
                 <div className="flex items-center justify-between">
-                  <label htmlFor="password" className="block text-sm/6 font-medium text-gray-900">
+                  <label
+                    htmlFor="password"
+                    className="block text-sm/6 font-medium text-gray-900"
+                  >
                     Password
                   </label>
                 </div>
@@ -143,11 +159,11 @@ export default function SignUpPage() {
               </div>
 
               <div>
-                {message &&
+                {message && (
                   <div className="mb-2">
                     <span className="text-red-600 text-sm">{message}</span>
                   </div>
-                }
+                )}
                 <button
                   disabled={loading}
                   type="submit"
@@ -169,8 +185,11 @@ export default function SignUpPage() {
             </form>
 
             <p className="mt-10 text-center text-sm/6 text-gray-500">
-              Already have an account?{' '}
-              <Link to="/login" className="font-semibold text-primary hover:text-primary-light">
+              Already have an account?{" "}
+              <Link
+                to="/login"
+                className="font-semibold text-primary hover:text-primary-light"
+              >
                 Sign in
               </Link>
             </p>
@@ -178,5 +197,5 @@ export default function SignUpPage() {
         </div>
       </div>
     </>
-  )
+  );
 }

@@ -49,7 +49,7 @@ export default function Footer({}) {
               <h5 className="mb-6 text-sm font-semibold text-gray-900 uppercase --dark:text-white">
                 <a
                   className="hover:underline"
-                  href="https://blog.transfer.zip/"
+                  href="https://blog.transfer.javascript.az/"
                 >
                   Blog
                 </a>
@@ -57,18 +57,18 @@ export default function Footer({}) {
               <ul className="text-gray-500 --dark:text-gray-400 font-medium">
                 <li className="mb-4">
                   <Link
-                    to="https://blog.transfer.zip/2025/04/05/how-to-send-large-video-files.html"
+                    to="https://blog.transfer.javascript.az/2025/04/05/how-to-send-large-video-files.html"
                     className="hover:underline "
                   >
                     Send Large Video Files
                   </Link>
                 </li>
                 {/* <li className="mb-4">
-                  <Link to="https://blog.transfer.zip/2025/04/01/android-file-transfer-for-mac.html" className="hover:underline ">Android to Mac File Transfer</Link>
+                  <Link to="https://blog.transfer.javascript.az/2025/04/01/android-file-transfer-for-mac.html" className="hover:underline ">Android to Mac File Transfer</Link>
                 </li> */}
                 <li className="mb-4">
                   <Link
-                    to="https://blog.transfer.zip/2025/03/07/how-send-100gb-files-for-free.html"
+                    to="https://blog.transfer.javascript.az/2025/03/07/how-send-100gb-files-for-free.html"
                     className="hover:underline "
                   >
                     Send 100GB Files Free
@@ -76,7 +76,7 @@ export default function Footer({}) {
                 </li>
                 <li>
                   <Link
-                    to="https://blog.transfer.zip/2025/03/08/how-send-large-audio-files.html"
+                    to="https://blog.transfer.javascript.az/2025/03/08/how-send-large-audio-files.html"
                     className="hover:underline"
                   >
                     Send Large Audio Files
@@ -107,7 +107,7 @@ export default function Footer({}) {
                 </li>
                 <li>
                   <a
-                    href="https://github.com/robinkarlberg/transfer.zip-web?tab=readme-ov-file#self-hosting"
+                    href="https://github.com/robinkarlberg/transfer.javascript.az-web?tab=readme-ov-file#self-hosting"
                     className="hover:underline"
                   >
                     Self Hosting
